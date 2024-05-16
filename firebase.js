@@ -14,11 +14,14 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig);
+
+// self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+
 initializeAppCheck(app, {
   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPTCHA_KEY_ID),
   isTokenAutoRefreshEnabled: true
 });
 
-if (window.location.hostname === 'localhost') {
-  connectFunctionsEmulator(getFunctions(app), 'localhost', 5001);
-}
+// if (window.location.hostname === 'localhost') {
+//   connectFunctionsEmulator(getFunctions(app), 'localhost', 5001);
+// }

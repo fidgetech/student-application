@@ -8,8 +8,7 @@ const ZAPIER_WEBHOOK_URL = defineString('ZAPIER_WEBHOOK_URL');
 const REQUIRED_FIELDS = ['token', 'citizen', 'veteran', 'emergencyContactName', 'emergencyContactPhone', 'emergencyContactAddress', 'personalStatement'];
 const OPTIONAL_FIELDS = ['encryptedSSN', 'gender', 'race'];
 
-exports.submitApplication = onCall(
-  { enforceAppCheck: true, consumeAppCheckToken: true },
+exports.submitApplication = onCall({ enforceAppCheck: true },
   async (request) => {
     const { data } = request;
     const filteredData = Object.keys(data).reduce((obj, key) => {

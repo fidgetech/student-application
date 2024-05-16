@@ -16,7 +16,7 @@ function App() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { isValidToken, token } = useTokenValidation();
-  
+
   useEffect(() => {
     if (!isValidToken) {
       setError({
