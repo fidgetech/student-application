@@ -5,8 +5,13 @@ import Success from './Success.jsx';
 import FourOhFour from './FourOhFour.jsx';
 import { CssBaseline } from '@mui/material';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Header from './Header.jsx';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Header heading='Redirecting...' subHeading=<meta http-equiv="refresh" content="0; url=https://www.fidgetech.org/studentapplication" /> />,
+  },
   {
     path: '/application-part-2',
     element: <App />,
