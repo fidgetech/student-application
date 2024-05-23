@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Container, Button, Box, Grid } from '@mui/material';
+import { Typography, Container, Button, Box, Grid, Divider } from '@mui/material';
 import { Formik, Form } from 'formik';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import '../firebase.js';
@@ -59,6 +59,11 @@ function App() {
         Student Application - Part 2
       </Typography>
 
+      <Typography variant='body1' align='center' gutterBottom>
+        We're asking for more personal information about you as part of evaluating the diversity of our application process. 
+        The demographics questions are optional, and your responses will not affect your chances of admission.
+      </Typography>
+
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form>
@@ -78,6 +83,8 @@ function App() {
               <RadioInput name='veteran' label='Have you served in the U.S. military/armed services?' options={yesNoOptions} required={true} />
             </Box>
 
+            <Divider sx={{ my: 6}} />
+
             <Box marginY={4}>
               <Typography variant='body' gutterBottom sx={{ fontStyle: 'italic' }}>
                 Note: We are required by law to ask students for their social security number. We report it to the Oregon state government, which uses it to measure program outcomes. You may choose not to provide your social security number with no penalty. We take utmost precaution with your social security number, including encrypting it before storing it.
@@ -86,6 +93,8 @@ function App() {
                 <TextInput name='ssn' label='Social Security Number' placeholder='XXX-XX-XXXX' />
               </Box>
             </Box>
+
+            <Divider sx={{ my: 6}} />
 
             <Box marginY={4}>
               <Typography variant='body' gutterBottom>
@@ -113,13 +122,15 @@ function App() {
               </Grid>
             </Box>
 
+            <Divider sx={{ my: 6}} />
+
             <Box marginY={4}>
               <Box marginY={1}>
                 <Typography gutterBottom>
                   Personal Statement<Typography component="span" color='error'> *</Typography>
                 </Typography>
                 <Typography variant='body' gutterBottom sx={{ fontStyle: 'italic' }}>
-                  Tell us more about why you want to complete this program, your passion for the topic, and any career aspirations you have.
+                  Tell us more about why you want to complete this program, your passion for the topic, and any career aspirations you have. (approximately 250 words)
                 </Typography>
               </Box>
               <TextAreaInput name='personalStatement' label='Personal Statement' rows={8} required={true} />
