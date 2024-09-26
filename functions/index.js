@@ -17,20 +17,6 @@ const COMBINED_ZAPIER_WEBHOOK = process.env.COMBINED_ZAPIER_WEBHOOK;
 const COMBINED_REQUIRED_FIELDS = [...APP_P1_REQUIRED_FIELDS, ...APP_P2_REQUIRED_FIELDS];
 const COMBINED_OPTIONAL_FIELDS = [...APP_P1_OPTIONAL_FIELDS, ...APP_P2_OPTIONAL_FIELDS];
 
-// temp - get rid after transition period
-exports.submitApplication = onCall({ enforceAppCheck: true },
-  async (request) => {
-    return submitHelper({
-      data: request.data,
-      url: APP_P2_ZAPIER_WEBHOOK,
-      requiredFields: APP_P2_REQUIRED_FIELDS,
-      optionalFields: APP_P2_OPTIONAL_FIELDS
-    });
-  }
-);
-
-
-
 exports.submitApplicationPart1 = onCall({ enforceAppCheck: true },
   async (request) => {
     return submitHelper({
