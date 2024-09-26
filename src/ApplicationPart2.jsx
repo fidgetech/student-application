@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Typography, Box, Grid, Divider } from '@mui/material';
-import { genderOptions, raceOptions, yesNoOptions } from '../config.js';
 import { CheckboxInput, RadioInput, TextInput, TextAreaInput } from './Inputs.jsx';
+import { genderOptions, raceOptions, yesNoOptions } from '../config.js';
 import { encryptData, formatContact } from '../utils.js';
 import useTokenValidation from '../hooks/useTokenValidation.jsx';
 
@@ -25,6 +25,7 @@ export default function ApplicationPart2({ setFormatData, setInvalidToken }) {
   }, [isValidToken]);
 
   useEffect(() => {
+    document.title = 'Application Part 2';
     setFormatData(() => formatData);
   }, []);
 

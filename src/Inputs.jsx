@@ -1,10 +1,14 @@
-import { Field } from 'formik';
-import { Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField } from '@mui/material';
+import { Box, Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField } from '@mui/material';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { PatternFormat } from 'react-number-format';
+import { Field, FastField } from 'formik';
 
-export const TextInput = ({ name, label, required, ...props }) => {
+export const TextInput = ({ name, label, required, fastField=true, ...props }) => {
+  const FieldComponent = fastField ? FastField : Field;
   return (
     <>
-      <Field name={name}>
+      <FieldComponent name={name}>
         {({ field, meta }) => (
           <TextField
             id={name}
@@ -18,14 +22,71 @@ export const TextInput = ({ name, label, required, ...props }) => {
             helperText={meta.touched && meta.error}
           />
         )}
-      </Field>
+      </FieldComponent>
     </>
+  );
+};
+
+export const DateInput = ({ name, label, required }) => {
+  return (
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <FastField name={name}>
+        {({ field, form }) => (
+          <DatePicker
+            label={label}
+            value={field.value}
+            onBlur={(newValue) => { form.setFieldValue(name, newValue) }}
+            slots={{
+              textField: (params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  required={required}
+                  // error={Boolean(form.touched[name] && form.errors[name])}
+                  // helperText={form.touched[name] && form.errors[name]}
+                />
+              ),
+            }}
+            inputFormat="MM/dd/yyyy"
+          />
+        )}
+      </FastField>
+    </LocalizationProvider>
+  );
+};
+
+export const PhoneInput = ({ label, name, ...props }) => {
+  // const { touched, errors, setFieldValue } = useFormikContext();
+  return (
+    <FastField name={name}>
+      {({ field, form }) => {
+        {/* const fieldError = getIn(errors, name);
+        const isTouched = getIn(touched, name); */}
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <PatternFormat
+              type='tel'
+              customInput={TextField}
+              label={label}
+              format='###-###-####'
+              onValueChange={({value}) => form.setFieldValue(name, value)}
+              inputMode='numeric'
+              fullWidth
+              // error={Boolean(isTouched && fieldError)}
+              // helperText={isTouched && fieldError}
+              {...field}
+              {...props}
+            />
+          </Box>
+        )
+      }}
+    </FastField>
   );
 };
 
 export const TextAreaInput = ({ name, rows, required }) => {
   return (
-    <Field
+    <FastField
       as={TextField}
       name={name}
       multiline
@@ -36,13 +97,14 @@ export const TextAreaInput = ({ name, rows, required }) => {
   );
 };
 
-export const CheckboxInput = ({ name, label, options, ...props }) => {
+export const CheckboxInput = ({ name, label, options, fastField=true, ...props }) => {
+  const FieldComponent = fastField ? FastField : Field;
   return (
     <>
       {label && <Typography gutterBottom htmlFor={name}>{label}</Typography>}
       {options.map(option => (
         <div key={option}>
-          <Field name={name}>
+          <FieldComponent name={name}>
             {({ field }) => (
               <FormControlLabel
                 control={
@@ -58,7 +120,7 @@ export const CheckboxInput = ({ name, label, options, ...props }) => {
                 label={option}
               />
             )}
-          </Field>
+          </FieldComponent>
         </div>
       ))}
     </>
@@ -75,7 +137,7 @@ export const RadioInput = ({ name, label, options, required, ...props }) => {
       <RadioGroup sx={{ '.MuiFormControlLabel-asterisk': { display: 'none' } }}>
         {options.map(option => (
           <div key={option}>
-            <Field name={name}>
+            <FastField name={name}>
               {({ field }) => (
                 <FormControlLabel
                   control={
@@ -92,42 +154,10 @@ export const RadioInput = ({ name, label, options, required, ...props }) => {
                   label={option}
                 />
               )}
-            </Field>
+            </FastField>
           </div>
         ))}
       </RadioGroup>
     </>
   );
 };
-
-// export const RadioButtons = ({ name, label, options, field, index, required }) => {
-//   const { values, errors, touched, setFieldValue } = useFormikContext();
-//   const fieldError = getIn(errors, name);
-//   const isTouched = getIn(touched, name);
-
-//   return (
-//     <FormControl error={Boolean(fieldError)}>
-//       {label && <Typography gutterBottom htmlFor={name}>
-//         {label}
-//         {required && <Typography component="span" color='error'> *</Typography>}
-//       </Typography>}
-//       <RadioGroup
-//         name={name}
-//         // value={values.people[index][field]}
-//         // onChange={ (e) => {
-//         //   setFieldValue(name, e.currentTarget.value, true);
-//         // } }>
-//         {options.map((option) => (
-//           <FormControlLabel
-//             key={option}
-//             label={option}
-//             value={option}
-//             labelPlacement="end"
-//             control={<Radio />}
-//           />
-//         ))}
-//       </RadioGroup>
-//       {isTouched && fieldError && <FormHelperText sx={{ mt: 2 }}>{fieldError}</FormHelperText>}
-//     </FormControl>
-//   );
-// };

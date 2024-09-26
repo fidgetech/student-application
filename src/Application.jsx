@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button } from '@mui/material';
+import { Container, Button, Box } from '@mui/material';
 import { Formik, Form } from 'formik';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import useTokenValidation from '../hooks/useTokenValidation.jsx';
 import '../firebase.js';
 import { initialValues } from '../config.js';
 import Header from './Header.jsx';
+import ApplicationPart1 from './ApplicationPart1.jsx';
 import ApplicationPart2 from './ApplicationPart2.jsx';
+import ApplicationCombined from './ApplicationCombined.jsx';
 
 const submitFunction = (page) => {
   const functionMap = {
@@ -25,6 +27,7 @@ export default function Application({ page }) {
   const [invalidToken, setInvalidToken] = useState(null);
   const [formatData, setFormatData] = useState(null);
 
+  // console.log('rendering parent')
   const submitData = async (data) => {
     const submitApplication = submitFunction(page);
     try {
@@ -54,12 +57,15 @@ export default function Application({ page }) {
 
   return (
     <Container maxWidth='sm' sx={{ my: 4 }}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Box textAlign='center' sx={{ mb: 2 }}>
+        <img src='/logo+copy.png' alt='Fidgetech Logo' style={{ width: '100%', maxWidth: '200px', margin: '0 auto' }} />
+      </Box>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit} validateOnChange={false} validateOnBlur={false}>
         {({ isSubmitting }) => (
           <Form>
-            {/* {page === 'page1' && <ApplicationPart1 setFormatData={setFormatData} />} */}
+            {page === 'page1' && <ApplicationPart1 setFormatData={setFormatData} />}
             {page === 'page2' && <ApplicationPart2 setFormatData={setFormatData} setInvalidToken={setInvalidToken} />}
-            {/* {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />} */}
+            {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />}
 
             {error && <Header heading={error.header} subHeading={error.message} color='error' />}
 

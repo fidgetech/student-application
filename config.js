@@ -31,7 +31,8 @@ export const initialValues = {
   emergencyCity: '',
   emergencyState: '',
   emergencyZip: '',
-  personalStatement: ''
+  personalStatement: '',
+  birthday: null
 };
 
 export const genderOptions = ['Woman', 'Man', 'Non-binary', 'Transgender', 'Other'];

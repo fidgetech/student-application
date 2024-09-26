@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Application from './Application.jsx';
-import ApplicationCombined from './ApplicationCombined.jsx';
 import Success from './Success.jsx';
 import FourOhFour from './FourOhFour.jsx';
 import { CssBaseline } from '@mui/material';
