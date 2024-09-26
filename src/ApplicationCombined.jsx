@@ -62,11 +62,6 @@ export default function ApplicationCombined({ setFormatData }) {
         <DateInput name='birthday' label='Date of birth' required={true} />
       </Box>
 
-      <Box marginy={4}>
-        <Typography>Parent / Guardian Contact Info<br />(Include Full Name, Email, Phone)</Typography>
-        <TextInput name='parent' />
-      </Box>
-
       <Box marginY={4}>
         <CheckboxInput name='pronouns' label='Pronouns (select all that apply)' options={pronounsOptions} fastField={false} />
         {values.pronouns?.includes('Other') && <TextInput name='pronounsOther' label='Pronouns (other)' fastField={false} sx={{ mt: 2 }} />}
@@ -100,7 +95,7 @@ export default function ApplicationCombined({ setFormatData }) {
       </Box>
 
       <Box marginY={4}>
-        <Typography>List the name & location of postsecondary institution(s) you attended, if any.</Typography>
+        <Typography>List postsecondary institution(s) you attended, if any.</Typography>
         <TextInput name='educationDetails' />
       </Box>
 
@@ -141,6 +136,11 @@ export default function ApplicationCombined({ setFormatData }) {
       </Box>
 
       <Divider sx={{ my: 6}} />
+
+      <Box marginy={4}>
+        <Typography>Parent / Guardian Contact Info<br />(Include Full Name, Email, Phone)</Typography>
+        <TextInput name='parent' />
+      </Box>
 
       <Box marginY={4}>
         <Typography variant='body' gutterBottom>
