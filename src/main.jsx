@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+import Application from './Application.jsx';
+import ApplicationCombined from './ApplicationCombined.jsx';
 import Success from './Success.jsx';
 import FourOhFour from './FourOhFour.jsx';
 import { CssBaseline } from '@mui/material';
@@ -13,8 +14,16 @@ const router = createBrowserRouter([
     element: <Header heading='Redirecting...' subHeading=<meta http-equiv="refresh" content="0; url=https://www.fidgetech.org/studentapplication" /> />,
   },
   {
+    path: '/application-part-1',
+    element: <Application page='page1' />,
+  },
+  {
     path: '/application-part-2',
-    element: <App />,
+    element: <Application page='page2' />,
+  },
+  {
+    path: '/application-combined',
+    element: <Application page='combined' />,
   },
   {
     path: '/success',
