@@ -27,7 +27,6 @@ export default function Application({ page }) {
   const [invalidToken, setInvalidToken] = useState(null);
   const [formatData, setFormatData] = useState(null);
 
-  // console.log('rendering parent')
   const submitData = async (data) => {
     const submitApplication = submitFunction(page);
     try {

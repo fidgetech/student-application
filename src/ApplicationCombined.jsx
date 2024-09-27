@@ -21,7 +21,6 @@ const formatData = (values) => {
 export default function ApplicationCombined({ setFormatData }) {
   const { values, setFieldValue } = useFormikContext();
 
-  // console.log('ApplicationCombined');
   useEffect(() => {
     document.title = 'Epicodus Transfers';
     setFormatData(() => formatData);
@@ -40,7 +39,7 @@ export default function ApplicationCombined({ setFormatData }) {
       </Typography>
 
       <Typography variant='h6' align='center' color='error' gutterBottom>
-        <strong>DEMO ONLY &mdash; DO NOT USE</strong>
+        <strong>For existing students only!</strong>
       </Typography>
 
       <Box marginY={4}>

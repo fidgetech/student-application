@@ -59,7 +59,7 @@ const submitHelper = async ({ data, url, requiredFields, optionalFields }) => {
   }, {});
   const isValidData = requiredFields.every(field => filteredData[field]);
   if (!isValidData) {
-    error('Data:', filteredData);
+    // error('Data:', filteredData);
     error('Missing required fields');
     throw new HttpsError('invalid-argument', 'Firebase function reports invalid data');
   }
