@@ -1,19 +1,16 @@
-// TO DO:
-// - add birthday input
-// - add to formatData func any additional properties that need renaming / reformatting
-
 import { useEffect } from 'react';
 import { Typography, Box, Grid, Divider } from '@mui/material';
-import { CheckboxInput, RadioInput, TextInput, TextAreaInput, DateInput, PhoneInput } from './Inputs.jsx';
+import { CheckboxInput, RadioInput, TextInput, TextAreaInput, NumberInput } from './Inputs.jsx';
 import { genderOptions, raceOptions, yesNoOptions, pronounsOptions, employmentOptions, admissionOptions, intendOptions, educationOptions } from '../config.js';
 import { encryptData, formatContact } from '../utils.js';
 import { useFormikContext } from 'formik';
 
 const formatData = (values) => {
-  const { ssn, genders, races, emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip, ...rest } = values;
+  console.log(values);
+  const { ssn, genders, races, emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip, pronouns, ...rest } = values;
   return {
     encryptedSSN: ssn ? encryptData(import.meta.env.VITE_PUBLIC_KEY, ssn) : null,
-    pronouns: values.pronouns.concat(values.pronounsOther).filter(p => p !== 'Other').join(', '),
+    pronouns: pronouns.concat(values.pronounsOther).filter(p => p !== 'Other').join(', '),
     gender: genders.length ? genders.join(', ') : null,
     race: races.length ? races.join(', ') : null,
     emergencyContact: formatContact(emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip),
@@ -51,7 +48,7 @@ export default function ApplicationCombined({ setFormatData }) {
         <TextInput name='lastname' label='Last Name (legal)' required={true} sx={{ mb: 2 }} />
         <TextInput name='preferred' label='Preferred First Name' sx={{ mb: 2 }} />
         <TextInput name='email' label='Student Email' required={true}sx={{ mb: 2 }} />
-        <PhoneInput name='phone' label='Phone' required={true} sx={{ mb: 2 }} />
+        <NumberInput name='phone' label='Phone' required={true} format='###-###-####' placeholder='###-###-####' sx={{ mb: 2 }} />
         <TextInput name='address' label='Street Address' required={true} sx={{ mb: 2 }} />
         <TextInput name='city' label='City' required={true} sx={{ mb: 2 }} />
         <TextInput name='state' label='State' required={true} sx={{ mb: 2 }} />
@@ -59,7 +56,7 @@ export default function ApplicationCombined({ setFormatData }) {
       </Box>
 
       <Box marginY={4}>
-        <DateInput name='birthday' label='Date of birth' required={true} />
+        <NumberInput name='birthday' label='Date of birth (MM/DD/YYYY)' required={true} format='##/##/####' placeholder='MM/DD/YYYY' />
       </Box>
 
       <Box marginY={4}>
@@ -150,7 +147,7 @@ export default function ApplicationCombined({ setFormatData }) {
           <TextInput name='emergencyName' label='Name' required={true} />
         </Box>
         <Box marginY={1}>
-          <PhoneInput name='emergencyPhone' label='Phone' required={true} />
+          <NumberInput name='emergencyPhone' label='Phone' format='###-###-####' placeholder='###-###-####' required={true} />
         </Box>
         <Box marginY={1}>
           <TextInput name='emergencyAddress' label='Street Address' required={true} />

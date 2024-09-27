@@ -1,8 +1,9 @@
 import { Box, Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { PatternFormat } from 'react-number-format';
 import { Field, FastField } from 'formik';
+// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+// import moment from 'moment';
 
 export const TextInput = ({ name, label, required, fastField=true, ...props }) => {
   const FieldComponent = fastField ? FastField : Field;
@@ -27,35 +28,37 @@ export const TextInput = ({ name, label, required, fastField=true, ...props }) =
   );
 };
 
-export const DateInput = ({ name, label, required }) => {
-  return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
-      <FastField name={name}>
-        {({ field, form }) => (
-          <DatePicker
-            label={label}
-            value={field.value}
-            onBlur={(newValue) => { form.setFieldValue(name, newValue) }}
-            slots={{
-              textField: (params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  required={required}
-                  // error={Boolean(form.touched[name] && form.errors[name])}
-                  // helperText={form.touched[name] && form.errors[name]}
-                />
-              ),
-            }}
-            inputFormat="MM/dd/yyyy"
-          />
-        )}
-      </FastField>
-    </LocalizationProvider>
-  );
-};
+// export const DateInput = ({ name, label, required }) => {
+//   return (
+//     <LocalizationProvider dateAdapter={AdapterMoment}>
+//       <FastField name={name}>
+//         {({ field, form }) => (
+//           <DatePicker
+//             label={label}
+//             value={field.value}
+//             onChange={(newValue) => {
+//               if (newValue) form.setFieldValue(name, newValue);
+//             }}
+//             slots={{
+//               textField: (params) => (
+//                 <TextField
+//                   {...params}
+//                   fullWidth
+//                   required={required}
+//                   // error={Boolean(form.touched[name] && form.errors[name])}
+//                   // helperText={form.touched[name] && form.errors[name]}
+//                 />
+//               ),
+//             }}
+//             inputFormat="MM/dd/yyyy"
+//           />
+//         )}
+//       </FastField>
+//     </LocalizationProvider>
+//   );
+// };
 
-export const PhoneInput = ({ label, name, ...props }) => {
+export const NumberInput = ({ label, name, format, placeholder, ...props }) => {
   // const { touched, errors, setFieldValue } = useFormikContext();
   return (
     <FastField name={name}>
@@ -68,7 +71,8 @@ export const PhoneInput = ({ label, name, ...props }) => {
               type='tel'
               customInput={TextField}
               label={label}
-              format='###-###-####'
+              format={format}
+              placeholder={placeholder}
               onValueChange={({value}) => form.setFieldValue(name, value)}
               inputMode='numeric'
               fullWidth

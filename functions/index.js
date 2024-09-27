@@ -4,8 +4,8 @@ const axios = require("axios");
 
 // FOR APPLICATION PART 1; include all keys here
 const APP_P1_ZAPIER_WEBHOOK = process.env.APP_P1_ZAPIER_WEBHOOK;
-const APP_P1_REQUIRED_FIELDS = ['token', 'firstname', 'lastname', 'email', 'phone', 'address', 'city', 'state', 'zip', 'stateid', 'diagnosisAutism', 'education', 'employment', 'admission', 'intend', 'startdate'];
-const APP_P1_OPTIONAL_FIELDS = ['preferred', 'parent', 'pronouns', 'pronounsOther', 'diagnosisOther', 'educationDetails'];
+const APP_P1_REQUIRED_FIELDS = ['firstname', 'lastname', 'email', 'phone', 'address', 'city', 'state', 'zip', 'birthday', 'stateid', 'diagnosisAutism', 'education', 'employment', 'admission', 'intend', 'startdate'];
+const APP_P1_OPTIONAL_FIELDS = ['preferred', 'parent', 'pronouns', 'diagnosisOther', 'educationDetails'];
 
 // FOR APPLICATION PART 2; include all keys here
 const APP_P2_ZAPIER_WEBHOOK = process.env.APP_P2_ZAPIER_WEBHOOK;
@@ -14,8 +14,8 @@ const APP_P2_OPTIONAL_FIELDS = ['encryptedSSN', 'gender', 'race'];
 
 // FOR EXISTING STUDENTS TRANSFERRING FROM EPICODUS (TEMPORARY)
 const COMBINED_ZAPIER_WEBHOOK = process.env.COMBINED_ZAPIER_WEBHOOK;
-const COMBINED_REQUIRED_FIELDS = [...APP_P1_REQUIRED_FIELDS, ...APP_P2_REQUIRED_FIELDS];
-const COMBINED_OPTIONAL_FIELDS = [...APP_P1_OPTIONAL_FIELDS, ...APP_P2_OPTIONAL_FIELDS];
+const COMBINED_REQUIRED_FIELDS = ['firstname', 'lastname', 'email', 'phone', 'address', 'city', 'state', 'zip', 'birthday', 'stateid', 'diagnosisAutism', 'education', 'employment', 'admission', 'intend', 'startdate', 'citizen', 'veteran', 'emergencyContact', 'personalStatement'];
+const COMBINED_OPTIONAL_FIELDS = ['preferred', 'parent', 'pronouns', 'diagnosisOther', 'educationDetails', 'encryptedSSN', 'gender', 'race'];
 
 exports.submitApplicationPart1 = onCall({ enforceAppCheck: true },
   async (request) => {
@@ -59,6 +59,7 @@ const submitHelper = async ({ data, url, requiredFields, optionalFields }) => {
   }, {});
   const isValidData = requiredFields.every(field => filteredData[field]);
   if (!isValidData) {
+    error('Data:', filteredData);
     error('Missing required fields');
     throw new HttpsError('invalid-argument', 'Firebase function reports invalid data');
   }
