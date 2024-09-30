@@ -55,7 +55,7 @@ export default function Application({ page }) {
   }
 
   return (
-    <Container maxWidth='sm' sx={{ my: 4 }}>
+    <Container maxWidth='sm' sx={{ mt: 4, mb: 50 }}>
       <Box textAlign='center' sx={{ mb: 2 }}>
         <img src='/logo+copy.png' alt='Fidgetech Logo' style={{ width: '100%', maxWidth: '200px', margin: '0 auto' }} />
       </Box>
