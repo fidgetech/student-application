@@ -16,7 +16,7 @@ export default function ApplicationPart1({ setFormatData }) {
   const { values, setFieldValue } = useFormikContext();
 
   useEffect(() => {
-    document.title = 'Fidgetech Application';
+    // document.title = 'Fidgetech Application';
     setFormatData(() => formatData);
   }, []);
 
