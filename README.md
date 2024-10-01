@@ -16,3 +16,5 @@ Store private key in [decrypt app](https://github.com/fidgetech/decrypt).
 Make updates as needed in `config.js`.
 
 Auto-deploys via GitHub action on push / merge to main.
+
+test
