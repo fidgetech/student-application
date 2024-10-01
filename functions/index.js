@@ -19,7 +19,7 @@ const COMBINED_OPTIONAL_FIELDS = ['preferred', 'parent', 'pronouns', 'diagnosisO
 
 exports.submitApplicationPart1 = onCall({ enforceAppCheck: true },
   async (request) => {
-    info('Data:', request.data);
+    // info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: APP_P1_ZAPIER_WEBHOOK,
@@ -31,7 +31,7 @@ exports.submitApplicationPart1 = onCall({ enforceAppCheck: true },
 
 exports.submitApplicationPart2 = onCall({ enforceAppCheck: true },
   async (request) => {
-    info('Data:', request.data);
+    // info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: APP_P2_ZAPIER_WEBHOOK,
@@ -43,7 +43,7 @@ exports.submitApplicationPart2 = onCall({ enforceAppCheck: true },
 
 exports.submitCombinedApplication = onCall({ enforceAppCheck: true },
   async (request) => {
-    info('Data:', request.data);
+    // info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: COMBINED_ZAPIER_WEBHOOK,

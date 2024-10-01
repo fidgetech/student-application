@@ -76,7 +76,7 @@ export default function ApplicationPart1({ setFormatData }) {
 
       <Box marginY={4}>
         <Typography>Please list any other diagnoses you are willing to disclose, if any.</Typography>
-        <TextInput name='diagnosisOther' />
+        <TextAreaInput name='diagnosisOther' rows={2} />
       </Box>
 
       <Box marginY={4}>
@@ -85,7 +85,7 @@ export default function ApplicationPart1({ setFormatData }) {
 
       <Box marginY={4}>
         <Typography>List postsecondary institution(s) you attended, if any.</Typography>
-        <TextInput name='educationDetails' />
+        <TextAreaInput name='educationDetails' rows={2} />
       </Box>
 
       <Box marginY={4}>
@@ -94,7 +94,7 @@ export default function ApplicationPart1({ setFormatData }) {
 
       <Box marginy={4}>
         <Typography>Parent / Guardian Contact Info<br />(Include Full Name, Email, Phone)</Typography>
-        <TextInput name='parent' />
+        <TextAreaInput name='parent' rows={2} />
       </Box>
 
       <Divider sx={{ my: 6}} />

@@ -96,7 +96,7 @@ export const TextAreaInput = ({ name, rows, required }) => {
       multiline
       rows={rows}
       required={required}
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', '& textarea': { resize: 'vertical' } }}
     />
   );
 };
