@@ -6,11 +6,10 @@ import { encryptData, formatContact } from '../utils.js';
 import { useFormikContext } from 'formik';
 
 const formatData = (values) => {
-  console.log(values);
-  const { ssn, genders, races, emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip, pronouns, ...rest } = values;
+  const { ssn, genders, races, emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip, pronouns, pronounsOther, ...rest } = values;
   return {
     encryptedSSN: ssn ? encryptData(import.meta.env.VITE_PUBLIC_KEY, ssn) : null,
-    pronouns: pronouns.concat(values.pronounsOther).filter(p => p !== 'Other').join(', '),
+    pronouns: pronouns.concat(pronounsOther).filter(p => p !== 'Other').join(', '),
     gender: genders.length ? genders.join(', ') : null,
     race: races.length ? races.join(', ') : null,
     emergencyContact: formatContact(emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip),

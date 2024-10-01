@@ -38,11 +38,9 @@ export const initialValues = {
 export const genderOptions = ['Woman', 'Man', 'Non-binary', 'Transgender', 'Other'];
 export const raceOptions = ['Hispanic or Latino', 'Native American or Alaskan Native', 'Asian', 'Native Hawaiian or Pacific Islander', 'African American', 'Caucasian', 'Other'];
 export const yesNoOptions = ['Yes', 'No'];
-
-// temp for combined application for existing students transitioning from Epicodus
 export const pronounsOptions = ['She / her / hers', 'He / him / his', 'They / them / their', 'Other'];
 export const employmentOptions = ['Yes, 35+ hours/week', 'Yes, less than 35 hours/week', 'No, not at this time'];
 export const admissionOptions = ['Career preparation and employment', 'Advanced training / continuing education', 'Personal development / self improvement'];
 export const intendOptions = ['Website and Mobile App Development Full-time', 'Website and Mobile App Development Part-time (morning 9am - 12pm PT)', 'Website and Mobile App Development Part-time (afternoon 1pm - 4pm PT)'];
 export const educationOptions = ['Some high school', 'High school or equivalent', 'Some college', 'Certificate program at community college', 'Associate degree', "Bachelor's degree", "Master's degree", 'Doctorate or professional degree'];
-// export const startdateOptions = ['September 3, 2024', 'October 1, 2024', 'November 1, 2024', 'January 3, 2025'];
+export const startdateOptions = ['October 1, 2024', 'November 1, 2024', 'January 3, 2025'];
