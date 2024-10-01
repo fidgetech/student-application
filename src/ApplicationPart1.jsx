@@ -26,6 +26,15 @@ export default function ApplicationPart1({ setFormatData }) {
     }
   }, [values.pronouns, setFieldValue]);
 
+  useEffect(() => {
+    const postHeight = () => {
+      window.parent.postMessage({ height: document.documentElement.scrollHeight }, '*');
+    };
+    postHeight();
+    window.addEventListener('resize', postHeight);
+    return () => window.removeEventListener('resize', postHeight);
+  }, []);
+
   return (
     <>
       <Typography variant='h4' align='center' gutterBottom>
