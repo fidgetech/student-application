@@ -10,6 +10,7 @@ import Header from './Header.jsx';
 import ApplicationPart1 from './ApplicationPart1.jsx';
 import ApplicationPart2 from './ApplicationPart2.jsx';
 import ApplicationCombined from './ApplicationCombined.jsx';
+import { validationSchema } from './validationSchema.js';
 
 const submitFunction = (page) => {
   const functionMap = {
@@ -32,7 +33,7 @@ export default function Application({ page }) {
     try {
       const response = await submitApplication({ token, ...data });
       if (response.data.success) {
-        navigate('/success', { replace: true });
+        window.location.href = 'https://www.fidgetech.org/success';
       } else {
         throw new Error('Failed to submit application');
       }
@@ -45,6 +46,7 @@ export default function Application({ page }) {
   }
 
   const handleSubmit = async (values, { setSubmitting }) => {
+    setError(null);
     const data = formatData(values);
     await submitData(data);
     setSubmitting(false);
@@ -59,17 +61,23 @@ export default function Application({ page }) {
       <Box textAlign='center' sx={{ mb: 2 }}>
         <img src='/logo+copy.png' alt='Fidgetech Logo' style={{ width: '100%', maxWidth: '200px', margin: '0 auto' }} />
       </Box>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit} validateOnChange={false} validateOnBlur={false}>
-        {({ isSubmitting }) => (
-          <Form>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema(page)}
+        validateOnChange={false}
+        validateOnBlur={true}
+      >
+        {(formik) => (
+          <Form spellCheck='false'>
             {page === 'page1' && <ApplicationPart1 setFormatData={setFormatData} />}
             {page === 'page2' && <ApplicationPart2 setFormatData={setFormatData} setInvalidToken={setInvalidToken} />}
             {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />}
 
             {error && <Header heading={error.header} subHeading={error.message} color='error' />}
 
-            <Button type='submit' variant='contained' color='primary' disabled={isSubmitting}>
-              Submit
+            <Button type='submit' variant='contained' color='primary' disabled={formik.isSubmitting}>
+              Submit Application
             </Button>
           </Form>
         )}

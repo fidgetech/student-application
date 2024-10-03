@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Application from './Application.jsx';
-import Success from './Success.jsx';
+// import Success from './Success.jsx';
 import FourOhFour from './FourOhFour.jsx';
 import { CssBaseline } from '@mui/material';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -24,10 +24,10 @@ const router = createBrowserRouter([
     path: '/application-combined',
     element: <Application page='combined' />,
   },
-  {
-    path: '/success',
-    element: <Success />,
-  },
+  // {
+  //   path: '/success',
+  //   element: <Success />,
+  // },
   {
     path: '*',
     element: <FourOhFour />

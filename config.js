@@ -32,7 +32,8 @@ export const initialValues = {
   emergencyState: '',
   emergencyZip: '',
   personalStatement: '',
-  birthday: null
+  birthday: null,
+  emailConfirm: ''
 };
 
 export const genderOptions = ['Woman', 'Man', 'Non-binary', 'Transgender', 'Other'];

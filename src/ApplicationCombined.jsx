@@ -6,13 +6,16 @@ import { encryptData, formatContact } from '../utils.js';
 import { useFormikContext } from 'formik';
 
 const formatData = (values) => {
-  const { ssn, genders, races, emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip, pronouns, pronounsOther, ...rest } = values;
+  const { pronouns, pronounsOther, diagnosisOther, educationDetails, parent, ssn, genders, races, emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip, ...rest } = values;
   return {
-    encryptedSSN: ssn ? encryptData(import.meta.env.VITE_PUBLIC_KEY, ssn) : null,
     pronouns: pronouns.concat(pronounsOther).filter(p => p !== 'Other').join(', '),
+    diagnosisOther: diagnosisOther.replace(/\n/g, '; '),
+    educationDetails: educationDetails.replace(/\n/g, '; '),
+    parent: parent.replace(/\n/g, '; '),
     gender: genders.length ? genders.join(', ') : null,
     race: races.length ? races.join(', ') : null,
     emergencyContact: formatContact(emergencyName, emergencyPhone, emergencyAddress, emergencyCity, emergencyState, emergencyZip),
+    encryptedSSN: ssn ? encryptData(import.meta.env.VITE_PUBLIC_KEY, ssn) : null,
     ...rest
   };
 }
@@ -21,7 +24,7 @@ export default function ApplicationCombined({ setFormatData }) {
   const { values, setFieldValue } = useFormikContext();
 
   useEffect(() => {
-    document.title = 'Epicodus Transfers';
+    document.title = 'Transfer Application';
     setFormatData(() => formatData);
   }, []);
 
@@ -34,11 +37,7 @@ export default function ApplicationCombined({ setFormatData }) {
   return (
     <>
       <Typography variant='h4' align='center' gutterBottom>
-        For Existing Epicodus Students
-      </Typography>
-
-      <Typography variant='h6' align='center' color='error' gutterBottom>
-        <strong>For existing students only!</strong>
+        Transfer Application Form for Former Epicodus Students
       </Typography>
 
       <Box marginY={4}>
@@ -46,6 +45,7 @@ export default function ApplicationCombined({ setFormatData }) {
         <TextInput name='lastname' label='Last Name (legal)' required={true} sx={{ mb: 2 }} />
         <TextInput name='preferred' label='Preferred First Name' sx={{ mb: 2 }} />
         <TextInput name='email' label='Student Email' required={true}sx={{ mb: 2 }} />
+        <TextInput name='emailConfirm' label='Re-enter Email' required={true} sx={{ mb: 2 }} />
         <NumberInput name='phone' label='Phone' required={true} format='###-###-####' placeholder='###-###-####' sx={{ mb: 2 }} />
         <TextInput name='address' label='Street Address' required={true} sx={{ mb: 2 }} />
         <TextInput name='city' label='City' required={true} sx={{ mb: 2 }} />
@@ -82,7 +82,7 @@ export default function ApplicationCombined({ setFormatData }) {
 
       <Box marginY={4}>
         <Typography>Please list any other diagnoses you are willing to disclose, if any.</Typography>
-        <TextInput name='diagnosisOther' />
+        <TextAreaInput name='diagnosisOther' rows={2} />
       </Box>
 
       <Box marginY={4}>
@@ -91,7 +91,7 @@ export default function ApplicationCombined({ setFormatData }) {
 
       <Box marginY={4}>
         <Typography>List postsecondary institution(s) you attended, if any.</Typography>
-        <TextInput name='educationDetails' />
+        <TextAreaInput name='educationDetails' rows={2} />
       </Box>
 
       <Box marginY={4}>
@@ -134,7 +134,7 @@ export default function ApplicationCombined({ setFormatData }) {
 
       <Box marginy={4}>
         <Typography>Parent / Guardian Contact Info<br />(Include Full Name, Email, Phone)</Typography>
-        <TextInput name='parent' />
+        <TextAreaInput name='parent' rows={2} />
       </Box>
 
       <Box marginY={4}>

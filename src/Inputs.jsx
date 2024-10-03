@@ -1,6 +1,6 @@
-import { Box, Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField } from '@mui/material';
+import { Box, Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField, FormHelperText } from '@mui/material';
 import { PatternFormat } from 'react-number-format';
-import { Field, FastField } from 'formik';
+import { useFormikContext, Field, FastField, getIn } from 'formik';
 // import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 // import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 // import moment from 'moment';
@@ -59,12 +59,11 @@ export const TextInput = ({ name, label, required, fastField=true, ...props }) =
 // };
 
 export const NumberInput = ({ label, name, format, placeholder, ...props }) => {
-  // const { touched, errors, setFieldValue } = useFormikContext();
   return (
     <FastField name={name}>
       {({ field, form }) => {
-        {/* const fieldError = getIn(errors, name);
-        const isTouched = getIn(touched, name); */}
+        const fieldError = getIn(form.errors, name);
+        const isTouched = getIn(form.touched, name);
         return (
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <PatternFormat
@@ -76,8 +75,8 @@ export const NumberInput = ({ label, name, format, placeholder, ...props }) => {
               onValueChange={({value}) => form.setFieldValue(name, value)}
               inputMode='numeric'
               fullWidth
-              // error={Boolean(isTouched && fieldError)}
-              // helperText={isTouched && fieldError}
+              error={Boolean(isTouched && fieldError)}
+              helperText={isTouched && fieldError}
               {...field}
               {...props}
             />
@@ -132,6 +131,9 @@ export const CheckboxInput = ({ name, label, options, fastField=true, ...props }
 };
 
 export const RadioInput = ({ name, label, options, required, ...props }) => {
+  const { errors, touched } = useFormikContext();
+  const fieldError = getIn(errors, name);
+  const isTouched = getIn(touched, name);
   return (
     <>
       {label && <Typography gutterBottom htmlFor={name}>
@@ -162,6 +164,7 @@ export const RadioInput = ({ name, label, options, required, ...props }) => {
           </div>
         ))}
       </RadioGroup>
+      {isTouched && fieldError && <FormHelperText sx={{ mt: 2, color: 'rgb(211, 47, 47)' }}>{fieldError}</FormHelperText>}
     </>
   );
 };

@@ -1,22 +1,24 @@
-import { useEffect } from 'react';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Typography, Box, Divider, FormHelperText } from '@mui/material';
 import { CheckboxInput, RadioInput, TextInput, TextAreaInput, NumberInput } from './Inputs.jsx';
 import { yesNoOptions, pronounsOptions, educationOptions, employmentOptions, admissionOptions, intendOptions, startdateOptions } from '../config.js';
 import { useFormikContext } from 'formik';
 
 const formatData = (values) => {
-  const { pronouns, pronounsOther, ...rest } = values;
+  const { pronouns, pronounsOther, diagnosisOther, educationDetails, parent, ...rest } = values;
   return {
     pronouns: pronouns.concat(pronounsOther).filter(p => p !== 'Other').join(', '),
+    diagnosisOther: diagnosisOther.replace(/\n/g, '; '),
+    educationDetails: educationDetails.replace(/\n/g, '; '),
+    parent: parent.replace(/\n/g, '; '),
     ...rest
   };
 }
 
 export default function ApplicationPart1({ setFormatData }) {
-  const { values, setFieldValue } = useFormikContext();
+  const { values, errors, setFieldValue, isSubmitting } = useFormikContext();
 
   useEffect(() => {
-    // document.title = 'Fidgetech Application';
     setFormatData(() => formatData);
   }, []);
 
@@ -35,6 +37,17 @@ export default function ApplicationPart1({ setFormatData }) {
     return () => window.removeEventListener('resize', postHeight);
   }, []);
 
+  useEffect(() => {
+    if (isSubmitting && Object.keys(errors).length > 0) {
+      const errorField = Object.keys(errors)[0];
+      const errorElement = document.querySelector(`[name="${errorField}"]`);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth' });
+        errorElement.focus();
+      }
+    }
+  }, [isSubmitting, errors]);
+
   return (
     <>
       <Typography variant='h4' align='center' gutterBottom>
@@ -49,7 +62,8 @@ export default function ApplicationPart1({ setFormatData }) {
         <TextInput name='firstname' label='First Name (legal)' required={true} sx={{ mb: 2 }} />
         <TextInput name='lastname' label='Last Name (legal)' required={true} sx={{ mb: 2 }} />
         <TextInput name='preferred' label='Preferred First Name' sx={{ mb: 2 }} />
-        <TextInput name='email' label='Student Email' required={true}sx={{ mb: 2 }} />
+        <TextInput name='email' label='Student Email' required={true} sx={{ mb: 2 }} />
+        <TextInput name='emailConfirm' label='Re-enter Email' required={true} sx={{ mb: 2 }} />
         <NumberInput name='phone' label='Phone' required={true} format='###-###-####' placeholder='###-###-####' sx={{ mb: 2 }} />
         <TextInput name='address' label='Street Address' required={true} sx={{ mb: 2 }} />
         <TextInput name='city' label='City' required={true} sx={{ mb: 2 }} />
