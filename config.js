@@ -45,4 +45,4 @@ export const employmentOptions = ['Yes, 35+ hours/week', 'Yes, less than 35 hour
 export const admissionOptions = ['Career preparation and employment', 'Advanced training / continuing education', 'Personal development / self improvement'];
 export const intendOptions = ['Website and Mobile App Development Full-time', 'Website and Mobile App Development Part-time (morning 9am - 12pm PT)', 'Website and Mobile App Development Part-time (afternoon 1pm - 4pm PT)'];
 export const educationOptions = ['Some high school', 'High school or equivalent', 'Some college', 'Certificate program at community college', 'Associate degree', "Bachelor's degree", "Master's degree", 'Doctorate or professional degree'];
-export const startdateOptions = ['October 1, 2024', 'November 1, 2024', 'January 3, 2025'];
+export const startdateOptions = ['November 1, 2024', 'January 3, 2025'];
