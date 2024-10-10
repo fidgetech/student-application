@@ -29,13 +29,14 @@ export default function Application({ page }) {
   const [error, setError] = useState(null);
   const [invalidToken, setInvalidToken] = useState(null);
   const [formatData, setFormatData] = useState(null);
+  const successUrl = page === 'profile' ? 'https://www.fidgetech.org/success-profile' : 'https://www.fidgetech.org/success';
 
   const submitData = async (data) => {
     const submitApplication = submitFunction(page);
     try {
       const response = await submitApplication({ token, ...data });
       if (response.data.success) {
-        window.location.href = 'https://www.fidgetech.org/success';
+        window.location.href = successUrl;
       } else {
         throw new Error('Failed to submit application');
       }
