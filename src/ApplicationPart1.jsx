@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Typography, Box, Divider, FormHelperText } from '@mui/material';
+import { useEffect } from 'react';
+import { Typography, Box, Divider } from '@mui/material';
 import { CheckboxInput, RadioInput, TextInput, TextAreaInput, NumberInput } from './Inputs.jsx';
 import { yesNoOptions, pronounsOptions, educationOptions, employmentOptions, admissionOptions, intendOptions, startdateOptions } from '../config.js';
 import { useFormikContext } from 'formik';
@@ -51,7 +51,7 @@ export default function ApplicationPart1({ setFormatData }) {
   return (
     <>
       <Typography variant='h4' align='center' gutterBottom>
-      Fidgetech Application
+        Fidgetech Application
       </Typography>
 
       <Typography variant='body1' align='center' gutterBottom>

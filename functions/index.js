@@ -12,6 +12,11 @@ const APP_P2_ZAPIER_WEBHOOK = process.env.APP_P2_ZAPIER_WEBHOOK;
 const APP_P2_REQUIRED_FIELDS = ['token', 'citizen', 'veteran', 'emergencyContact', 'personalStatement'];
 const APP_P2_OPTIONAL_FIELDS = ['encryptedSSN', 'gender', 'race'];
 
+// FOR PROFILE EDIT FORM; include all keys here
+const PROFILE_EDIT_ZAPIER_WEBHOOK = process.env.PROFILE_EDIT_ZAPIER_WEBHOOK;
+const PROFILE_EDIT_REQUIRED_FIELDS = ['currentEmail'];
+const PROFILE_EDIT_OPTIONAL_FIELDS = ['email', 'preferred', 'phone', 'pronouns'];
+
 // FOR EXISTING STUDENTS TRANSFERRING FROM EPICODUS (TEMPORARY)
 const COMBINED_ZAPIER_WEBHOOK = process.env.COMBINED_ZAPIER_WEBHOOK;
 const COMBINED_REQUIRED_FIELDS = ['firstname', 'lastname', 'email', 'phone', 'address', 'city', 'state', 'zip', 'birthday', 'stateid', 'diagnosisAutism', 'education', 'employment', 'admission', 'intend', 'startdate', 'citizen', 'veteran', 'emergencyContact', 'personalStatement'];
@@ -49,6 +54,18 @@ exports.submitCombinedApplication = onCall({ enforceAppCheck: true },
       url: COMBINED_ZAPIER_WEBHOOK,
       requiredFields: COMBINED_REQUIRED_FIELDS,
       optionalFields: COMBINED_OPTIONAL_FIELDS
+    });
+  }
+);
+
+exports.submitProfileEdit = onCall({ enforceAppCheck: true },
+  async (request) => {
+    // info('Data:', request.data);
+    return submitHelper({
+      data: request.data,
+      url: PROFILE_EDIT_ZAPIER_WEBHOOK,
+      requiredFields: PROFILE_EDIT_REQUIRED_FIELDS,
+      optionalFields: PROFILE_EDIT_OPTIONAL_FIELDS
     });
   }
 );

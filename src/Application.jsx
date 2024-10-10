@@ -10,6 +10,7 @@ import Header from './Header.jsx';
 import ApplicationPart1 from './ApplicationPart1.jsx';
 import ApplicationPart2 from './ApplicationPart2.jsx';
 import ApplicationCombined from './ApplicationCombined.jsx';
+import ProfileEdit from './ProfileEdit.jsx';
 import { validationSchema } from './validationSchema.js';
 
 const submitFunction = (page) => {
@@ -73,6 +74,7 @@ export default function Application({ page }) {
             {page === 'page1' && <ApplicationPart1 setFormatData={setFormatData} />}
             {page === 'page2' && <ApplicationPart2 setFormatData={setFormatData} setInvalidToken={setInvalidToken} />}
             {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />}
+            {page === 'profile' && <ProfileEdit setFormatData={setFormatData} />}
 
             {error && <Header heading={error.header} subHeading={error.message} color='error' />}
 

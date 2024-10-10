@@ -28,8 +28,20 @@ export function validationSchema(page) {
     startdate: Yup.mixed().oneOf(startdateOptions).required('Required')
   });
 
+  const profileEditSchema = Yup.object({
+    emailCurrent: Yup.string().email('Invalid email address').required('Required'),
+    email: Yup.string().email('Invalid email address'),
+    emailConfirm: Yup.string().oneOf([Yup.ref('email'), null], 'Emails must match'),
+    preferred: Yup.string(),
+    phone: Yup.string().matches(/^\d{3}-\d{3}-\d{4}$/, 'Invalid phone number'),
+    pronouns: Yup.array().of(Yup.string()),
+    pronounsOther: Yup.string()
+  });
+
   if (page === 'page1') {
     return part1Schema;
+  } else if (page === 'profileEdit') {
+    return profileEditSchema;
   } else {
     return Yup.object();
   }
