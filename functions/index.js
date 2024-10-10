@@ -60,7 +60,7 @@ exports.submitCombinedApplication = onCall({ enforceAppCheck: true },
 
 exports.submitProfileEdit = onCall({ enforceAppCheck: true },
   async (request) => {
-    // info('Data:', request.data);
+    info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: PROFILE_EDIT_ZAPIER_WEBHOOK,

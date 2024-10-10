@@ -17,7 +17,8 @@ const submitFunction = (page) => {
   const functionMap = {
     page1: 'submitApplicationPart1',
     page2: 'submitApplicationPart2',
-    combined: 'submitCombinedApplication'
+    combined: 'submitCombinedApplication',
+    profile: 'submitProfileEdit'
   };
   return httpsCallable(getFunctions(), functionMap[page], { limitedUseAppCheckTokens: true });
 };
