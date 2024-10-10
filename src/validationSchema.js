@@ -40,7 +40,7 @@ export function validationSchema(page) {
 
   if (page === 'page1') {
     return part1Schema;
-  } else if (page === 'profileEdit') {
+  } else if (page === 'profile') {
     return profileEditSchema;
   } else {
     return Yup.object();

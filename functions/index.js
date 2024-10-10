@@ -14,7 +14,7 @@ const APP_P2_OPTIONAL_FIELDS = ['encryptedSSN', 'gender', 'race'];
 
 // FOR PROFILE EDIT FORM; include all keys here
 const PROFILE_EDIT_ZAPIER_WEBHOOK = process.env.PROFILE_EDIT_ZAPIER_WEBHOOK;
-const PROFILE_EDIT_REQUIRED_FIELDS = ['currentEmail'];
+const PROFILE_EDIT_REQUIRED_FIELDS = ['emailCurrent'];
 const PROFILE_EDIT_OPTIONAL_FIELDS = ['email', 'preferred', 'phone', 'pronouns'];
 
 // FOR EXISTING STUDENTS TRANSFERRING FROM EPICODUS (TEMPORARY)
