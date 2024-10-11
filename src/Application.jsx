@@ -72,10 +72,11 @@ export default function Application({ page }) {
         <img src='/logo+copy.png' alt='Fidgetech Logo' style={{ width: '100%', maxWidth: '200px', margin: '0 auto' }} />
       </Box>
 
-      {submissionSuccess &&
-        page === 'profile' ?
-          <Success heading="We have received your request." subHeading="Thank you!" />
-          : <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />
+      {submissionSuccess && page === 'profile' &&
+        <Success heading="We have received your request." subHeading="Thank you!" />
+      }
+      {submissionSuccess && page !== 'profile' &&
+        <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />
       }
 
       {!submissionSuccess &&
