@@ -59,39 +59,50 @@ export default function Application({ page }) {
     return <Header heading='Invalid Token' subHeading='Please let us know if you got here after following a link in your email.' />;
   }
 
-  if (submissionSuccess) {
-    return page === 'profile' ?
-      <Success heading="We have received your request." subHeading="Thank you!" /> :
-      <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />;
-  }
+  // if (submissionSuccess) {
+  //   return page === 'profile' ?
+  //     <Success heading="We have received your request." subHeading="Thank you!" /> :
+  //     <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />;
+  // }
 
   return (
     <Container maxWidth='sm' sx={{ mt: 4, mb: 4 }}>
+
       <Box textAlign='center' sx={{ mb: 2 }}>
         <img src='/logo+copy.png' alt='Fidgetech Logo' style={{ width: '100%', maxWidth: '200px', margin: '0 auto' }} />
       </Box>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema(page)}
-        validateOnChange={false}
-        validateOnBlur={true}
-      >
-        {(formik) => (
-          <Form spellCheck='false'>
-            {page === 'page1' && <ApplicationPart1 setFormatData={setFormatData} />}
-            {page === 'page2' && <ApplicationPart2 setFormatData={setFormatData} setInvalidToken={setInvalidToken} />}
-            {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />}
-            {page === 'profile' && <ProfileEdit setFormatData={setFormatData} />}
 
-            {error && <Header heading={error.header} subHeading={error.message} color='error' />}
+      {submissionSuccess &&
+        page === 'profile' ?
+          <Success heading="We have received your request." subHeading="Thank you!" />
+          : <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />
+      }
 
-            <Button type='submit' variant='contained' color='primary' disabled={formik.isSubmitting}>
-              Submit Application
-            </Button>
-          </Form>
-        )}
-      </Formik>
+      {!submissionSuccess &&
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema(page)}
+          validateOnChange={false}
+          validateOnBlur={true}
+        >
+          {(formik) => (
+            <Form spellCheck='false'>
+              {page === 'page1' && <ApplicationPart1 setFormatData={setFormatData} />}
+              {page === 'page2' && <ApplicationPart2 setFormatData={setFormatData} setInvalidToken={setInvalidToken} />}
+              {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />}
+              {page === 'profile' && <ProfileEdit setFormatData={setFormatData} />}
+
+              {error && <Header heading={error.header} subHeading={error.message} color='error' />}
+
+              <Button type='submit' variant='contained' color='primary' disabled={formik.isSubmitting}>
+                Submit Application
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      }
+
     </Container>
   );
 }
