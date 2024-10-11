@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Container, Button, Box } from '@mui/material';
 import { Formik, Form } from 'formik';
 import { getFunctions, httpsCallable } from 'firebase/functions';
@@ -12,6 +11,7 @@ import ApplicationPart2 from './ApplicationPart2.jsx';
 import ApplicationCombined from './ApplicationCombined.jsx';
 import ProfileEdit from './ProfileEdit.jsx';
 import { validationSchema } from './validationSchema.js';
+import Success from './Success.jsx';
 
 const submitFunction = (page) => {
   const functionMap = {
@@ -24,19 +24,19 @@ const submitFunction = (page) => {
 };
 
 export default function Application({ page }) {
-  const navigate = useNavigate();
   const { token } = useTokenValidation();
   const [error, setError] = useState(null);
+  const [submissionSuccess, setSubmissionSuccess] = useState(null);
   const [invalidToken, setInvalidToken] = useState(null);
   const [formatData, setFormatData] = useState(null);
-  const successUrl = page === 'profile' ? 'https://www.fidgetech.org/success-profile' : 'https://www.fidgetech.org/success';
 
   const submitData = async (data) => {
     const submitApplication = submitFunction(page);
     try {
+      // const response = { data: { success: true } }; // Mock response
       const response = await submitApplication({ token, ...data });
       if (response.data.success) {
-        window.location.href = successUrl;
+        setSubmissionSuccess(true);
       } else {
         throw new Error('Failed to submit application');
       }
@@ -57,6 +57,12 @@ export default function Application({ page }) {
 
   if (invalidToken) {
     return <Header heading='Invalid Token' subHeading='Please let us know if you got here after following a link in your email.' />;
+  }
+
+  if (submissionSuccess) {
+    return page === 'profile' ?
+      <Success heading="We have received your request." subHeading="Thank you!" /> :
+      <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />;
   }
 
   return (
