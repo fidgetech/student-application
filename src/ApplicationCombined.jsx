@@ -107,7 +107,7 @@ export default function ApplicationCombined({ setFormatData }) {
       </Box>
 
       <Box marginY={4}>
-        <Typography>Approximate date you began the program:</Typography>
+        <Typography>Approximate date you began the program:<Typography component="span" color='error'> *</Typography></Typography>
         <TextInput name='startdate' required={true} />
       </Box>
 
