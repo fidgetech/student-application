@@ -48,7 +48,7 @@ exports.submitApplicationPart2 = onCall({ enforceAppCheck: true },
 
 exports.submitCombinedApplication = onCall({ enforceAppCheck: true },
   async (request) => {
-    // info('Data:', request.data);
+    info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: COMBINED_ZAPIER_WEBHOOK,
@@ -60,7 +60,7 @@ exports.submitCombinedApplication = onCall({ enforceAppCheck: true },
 
 exports.submitProfileEdit = onCall({ enforceAppCheck: true },
   async (request) => {
-    info('Data:', request.data);
+    // info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: PROFILE_EDIT_ZAPIER_WEBHOOK,
@@ -79,7 +79,7 @@ const submitHelper = async ({ data, url, requiredFields, optionalFields }) => {
   }, {});
   const isValidData = requiredFields.every(field => filteredData[field]);
   if (!isValidData) {
-    // error('Data:', filteredData);
+    error('Filtered Data:', filteredData);
     error('Missing required fields');
     throw new HttpsError('invalid-argument', 'Firebase function reports invalid data');
   }
