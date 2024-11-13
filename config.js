@@ -35,6 +35,11 @@ export const initialValues = {
   birthday: null,
   emailConfirm: '',
   emailCurrent: '',
+  photoshop: '',
+  illustrator: '',
+  aftereffects: '',
+  canva: '',
+  artistic: ''
 };
 
 export const genderOptions = ['Woman', 'Man', 'Non-binary', 'Transgender', 'Other'];
@@ -46,3 +51,4 @@ export const admissionOptions = ['Career preparation and employment', 'Advanced 
 export const intendOptions = ['Website and Mobile App Development Full-time', 'Website and Mobile App Development Part-time (morning 9am - 12pm PT)', 'Website and Mobile App Development Part-time (afternoon 1pm - 4pm PT)'];
 export const educationOptions = ['Some high school', 'High school or equivalent', 'Some college', 'Certificate program at community college', 'Associate degree', "Bachelor's degree", "Master's degree", 'Doctorate or professional degree'];
 export const startdateOptions = ['November 1, 2024', 'January 3, 2025'];
+export const scaleOptions = ['1 (no knowledge)', '2', '3', '4', '5 (very experienced)'];

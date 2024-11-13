@@ -22,6 +22,9 @@ const COMBINED_ZAPIER_WEBHOOK = process.env.COMBINED_ZAPIER_WEBHOOK;
 const COMBINED_REQUIRED_FIELDS = ['firstname', 'lastname', 'email', 'phone', 'address', 'city', 'state', 'zip', 'birthday', 'stateid', 'diagnosisAutism', 'education', 'employment', 'admission', 'intend', 'startdate', 'citizen', 'veteran', 'emergencyContact', 'personalStatement'];
 const COMBINED_OPTIONAL_FIELDS = ['preferred', 'parent', 'pronouns', 'diagnosisOther', 'educationDetails', 'encryptedSSN', 'gender', 'race'];
 
+// FOR DESIGN WORKSHOP; include all keys here
+
+
 exports.submitApplicationPart1 = onCall({ enforceAppCheck: true },
   async (request) => {
     // info('Data:', request.data);

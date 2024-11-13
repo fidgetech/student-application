@@ -9,6 +9,7 @@ import Header from './Header.jsx';
 import ApplicationPart1 from './ApplicationPart1.jsx';
 import ApplicationPart2 from './ApplicationPart2.jsx';
 import ApplicationCombined from './ApplicationCombined.jsx';
+import ApplicationDesignWorkshop from './ApplicationDesignWorkshop.jsx';
 import ProfileEdit from './ProfileEdit.jsx';
 import { validationSchema } from './validationSchema.js';
 import Success from './Success.jsx';
@@ -18,7 +19,8 @@ const submitFunction = (page) => {
     page1: 'submitApplicationPart1',
     page2: 'submitApplicationPart2',
     combined: 'submitCombinedApplication',
-    profile: 'submitProfileEdit'
+    profile: 'submitProfileEdit',
+    workshop: 'submitDesignWorkshop'
   };
   return httpsCallable(getFunctions(), functionMap[page], { limitedUseAppCheckTokens: true });
 };
@@ -93,6 +95,7 @@ export default function Application({ page }) {
               {page === 'page2' && <ApplicationPart2 setFormatData={setFormatData} setInvalidToken={setInvalidToken} />}
               {page === 'combined' && <ApplicationCombined setFormatData={setFormatData} />}
               {page === 'profile' && <ProfileEdit setFormatData={setFormatData} />}
+              {page === 'workshop' && <ApplicationDesignWorkshop setFormatData={setFormatData} />}
 
               {error && <Header heading={error.header} subHeading={error.message} color='error' />}
 

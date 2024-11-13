@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <Application page='profile' />,
   },
   {
+    path: '/workshop',
+    element: <Application page='workshop' />,
+  },
+  {
     path: '*',
     element: <FourOhFour />
   }
