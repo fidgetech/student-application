@@ -20,7 +20,7 @@ const submitFunction = (page) => {
     page2: 'submitApplicationPart2',
     combined: 'submitCombinedApplication',
     profile: 'submitProfileEdit',
-    workshop: 'submitDesignWorkshop'
+    workshop: 'submitDesignWorkshopApplication'
   };
   return httpsCallable(getFunctions(), functionMap[page], { limitedUseAppCheckTokens: true });
 };
@@ -77,7 +77,10 @@ export default function Application({ page }) {
       {submissionSuccess && page === 'profile' &&
         <Success heading="We have received your request." subHeading="Thank you!" />
       }
-      {submissionSuccess && page !== 'profile' &&
+      {submissionSuccess && page === 'workshop' &&
+        <Success heading="Thank you for submitting your application for the design workshop!" subHeading='' />
+      }
+      {submissionSuccess && page !== 'profile' && page !== 'workshop' &&
         <Success heading="Thank you for submitting your application!" subHeading="We'll email you with next steps." />
       }
 

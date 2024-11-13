@@ -1,18 +1,13 @@
 import { useEffect } from 'react';
 import { Typography, Box, Divider } from '@mui/material';
-import { CheckboxInput, RadioInput, TextInput, TextAreaInput, NumberInput } from './Inputs.jsx';
+import { CheckboxInput, RadioInput, TextInput, NumberInput, SliderInput } from './Inputs.jsx';
 import { yesNoOptions, pronounsOptions, educationOptions, scaleOptions } from '../config.js';
 import { useFormikContext } from 'formik';
 
 const formatData = (values) => {
-  const { pronouns, pronounsOther, photoshop, illustrator, aftereffects, canva, artistic, ...rest } = values;
+  const { pronouns, pronounsOther, ...rest } = values;
   return {
     pronouns: pronouns.concat(pronounsOther).filter(p => p !== 'Other').join(', '),
-    photoshop: photoshop.replace(' (no knowledge)','').replace(' (very experienced)',''),
-    illustrator: illustrator.replace(' (no knowledge)','').replace(' (very experienced)',''),
-    aftereffects: aftereffects.replace(' (no knowledge)','').replace(' (very experienced)',''),
-    canva: canva.replace(' (no knowledge)','').replace(' (very experienced)',''),
-    artistic: artistic.replace(' (no knowledge)','').replace(' (very experienced)',''),
     ...rest
   };
 }
@@ -88,28 +83,34 @@ export default function ApplicationDesignWorkshop({ setFormatData }) {
 
       <Divider sx={{ my: 6}} />
 
-      <Typography variant='body1' align='center' gutterBottom>
+      <Typography variant='h5' align='center' gutterBottom>
         Experience
       </Typography>
 
+      <Typography variant='body1' align='center' gutterBottom>
+        Please rate your experience on a scale of 1-5:<br />
+        <em>1 = no knowledge<br />
+        5 = very experienced</em>
+      </Typography>
+
       <Box marginY={4}>
-        <RadioInput name='photoshop' label="How experienced are you with Adobe Photoshop, or a similar program like Paint.Net, Corel Painter, or Procreate?" options={scaleOptions} required={true} />
+        <SliderInput name='photoshop' label="How experienced are you with Adobe Photoshop, or a similar program like Paint.Net, Corel Painter, or Procreate?" options={scaleOptions} required={true} />
       </Box>
 
       <Box marginY={4}>
-        <RadioInput name='illustrator' label="How experienced are you with Adobe Illustrator, or similar vector software like GIMP or Figma?" options={scaleOptions} required={true} />
+        <SliderInput name='illustrator' label="How experienced are you with Adobe Illustrator, or similar vector software like GIMP or Figma?" options={scaleOptions} required={true} />
       </Box>
 
       <Box marginY={4}>
-        <RadioInput name='aftereffects' label="How experienced are you with Adobe After Effects or Adobe Animate?" options={scaleOptions} required={true} />
+        <SliderInput name='aftereffects' label="How experienced are you with Adobe After Effects or Adobe Animate?" options={scaleOptions} required={true} />
       </Box>
 
       <Box marginY={4}>
-        <RadioInput name='canva' label="If you haven't used any of these programs, have you used free online software like Canva before?" options={scaleOptions} required={true} />
+        <SliderInput name='canva' label="Have you used free online software like Canva before?" options={scaleOptions} required={true} />
       </Box>
 
       <Box marginY={4}>
-        <RadioInput name='artistic' label="If you don't normally use computers or software to create art or designs, on a scale of 1-5, how confident are you in your artistic or visual skills when drawing or designing things on paper, with crafts, or through sculpture?" options={scaleOptions} required={true} />
+        <SliderInput name='artistic' label="How confident are you in your artistic or visual skills when drawing or designing things on paper, with crafts, or through sculpture?" options={scaleOptions} required={true} />
       </Box>
     </>
   )

@@ -1,4 +1,4 @@
-import { Box, Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField, FormHelperText } from '@mui/material';
+import { Box, Typography, Checkbox, FormControlLabel, RadioGroup, Radio, TextField, FormHelperText, Slider } from '@mui/material';
 import { PatternFormat } from 'react-number-format';
 import { useFormikContext, Field, FastField, getIn } from 'formik';
 // import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -165,6 +165,47 @@ export const RadioInput = ({ name, label, options, required, ...props }) => {
         ))}
       </RadioGroup>
       {isTouched && fieldError && <FormHelperText sx={{ mt: 2, color: 'rgb(211, 47, 47)' }}>{fieldError}</FormHelperText>}
+    </>
+  );
+};
+
+export const SliderInput = ({ name, label, required, ...props }) => {
+  const { errors, touched, setFieldValue, values } = useFormikContext();
+  const fieldError = getIn(errors, name);
+  const isTouched = getIn(touched, name);
+  const value = getIn(values, name);
+
+  const marks = [
+    { value: 1, label: '1' },
+    { value: 2, label: '2' },
+    { value: 3, label: '3' },
+    { value: 4, label: '4' },
+    { value: 5, label: '5' },
+  ];
+
+  return (
+    <>
+      {label && (
+        <Typography gutterBottom htmlFor={name}>
+          {label}
+          {required && <Typography component="span" color="error"> *</Typography>}
+        </Typography>
+      )}
+      <Slider
+        value={value || 1}
+        onChange={(e, newValue) => setFieldValue(name, newValue)}
+        aria-labelledby={name}
+        step={1}
+        marks={marks}
+        min={1}
+        max={5}
+        {...props}
+      />
+      {isTouched && fieldError && (
+        <FormHelperText sx={{ mt: 2, color: 'rgb(211, 47, 47)' }}>
+          {fieldError}
+        </FormHelperText>
+      )}
     </>
   );
 };

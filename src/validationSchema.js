@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { yesNoOptions, educationOptions, employmentOptions, admissionOptions, intendOptions, startdateOptions } from '../config.js';
+import { yesNoOptions, educationOptions, employmentOptions, admissionOptions, intendOptions, startdateOptions, scaleOptions } from '../config.js';
 
 export function validationSchema(page) {
   const part1Schema = Yup.object({
@@ -38,10 +38,32 @@ export function validationSchema(page) {
     pronounsOther: Yup.string()
   });
 
+  const workshopSchema = Yup.object({
+    firstname: Yup.string().required('Required'),
+    lastname: Yup.string().required('Required'),
+    preferred: Yup.string(),
+    email: Yup.string().email('Invalid email address').required('Required'),
+    emailConfirm: Yup.string().oneOf([Yup.ref('email'), null], 'Emails must match').required('Required'),
+    phone: Yup.string().matches(/^\d{3}-\d{3}-\d{4}$/, 'Invalid phone number').required('Required'),
+    birthday: Yup.string().matches(/^\d{2}\/\d{2}\/\d{4}$/, 'Invalid date').required('Required'),
+    pronouns: Yup.array().of(Yup.string()).required('Required'),
+    pronounsOther: Yup.string(),
+    stateid: Yup.mixed().oneOf(yesNoOptions).required('Required'),
+    diagnosisAutism: Yup.mixed().oneOf(yesNoOptions).required('Required'),
+    education: Yup.mixed().oneOf(educationOptions).required('Required'),
+    photoshop: Yup.mixed().oneOf(scaleOptions).required('Required'),
+    illustrator: Yup.mixed().oneOf(scaleOptions).required('Required'),
+    aftereffects: Yup.mixed().oneOf(scaleOptions).required('Required'),
+    canva: Yup.mixed().oneOf(scaleOptions).required('Required'),
+    artistic: Yup.mixed().oneOf(scaleOptions).required('Required')
+  });
+
   if (page === 'page1') {
     return part1Schema;
   } else if (page === 'profile') {
     return profileEditSchema;
+  } else if (page === 'workshop') {
+    return workshopSchema;
   } else {
     return Yup.object();
   }

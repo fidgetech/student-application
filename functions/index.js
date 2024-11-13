@@ -23,7 +23,9 @@ const COMBINED_REQUIRED_FIELDS = ['firstname', 'lastname', 'email', 'phone', 'ad
 const COMBINED_OPTIONAL_FIELDS = ['preferred', 'parent', 'pronouns', 'diagnosisOther', 'educationDetails', 'encryptedSSN', 'gender', 'race'];
 
 // FOR DESIGN WORKSHOP; include all keys here
-
+const DESIGN_WORKSHOP_ZAPIER_WEBHOOK = process.env.DESIGN_WORKSHOP_ZAPIER_WEBHOOK;
+const DESIGN_WORKSHOP_REQUIRED_FIELDS = ['firstname', 'lastname', 'email', 'phone', 'birthday', 'stateid', 'diagnosisAutism', 'education', 'photoshop', 'illustrator', 'aftereffects', 'canva', 'artistic'];
+const DESIGN_WORKSHOP_OPTIONAL_FIELDS = ['preferred', 'pronouns'];
 
 exports.submitApplicationPart1 = onCall({ enforceAppCheck: true },
   async (request) => {
@@ -51,12 +53,24 @@ exports.submitApplicationPart2 = onCall({ enforceAppCheck: true },
 
 exports.submitCombinedApplication = onCall({ enforceAppCheck: true },
   async (request) => {
-    info('Data:', request.data);
+    // info('Data:', request.data);
     return submitHelper({
       data: request.data,
       url: COMBINED_ZAPIER_WEBHOOK,
       requiredFields: COMBINED_REQUIRED_FIELDS,
       optionalFields: COMBINED_OPTIONAL_FIELDS
+    });
+  }
+);
+
+exports.submitDesignWorkshopApplication = onCall({ enforceAppCheck: true },
+  async (request) => {
+    info('Data:', request.data);
+    return submitHelper({
+      data: request.data,
+      url: DESIGN_WORKSHOP_ZAPIER_WEBHOOK,
+      requiredFields: DESIGN_WORKSHOP_REQUIRED_FIELDS,
+      optionalFields: DESIGN_WORKSHOP_OPTIONAL_FIELDS
     });
   }
 );
