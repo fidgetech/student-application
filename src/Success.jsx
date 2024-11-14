@@ -6,7 +6,7 @@ function Success({ heading='Success!', subHeading='Thank you for submitting your
     setTimeout(() => {
       window.scrollTo(0, 0);
       window.parent.postMessage({ height: document.documentElement.scrollHeight }, '*');
-    }, 500);
+    }, 0);
   }, []);
 
   return <Header heading={heading} subHeading={subHeading} />;

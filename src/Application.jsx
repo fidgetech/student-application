@@ -38,7 +38,12 @@ export default function Application({ page }) {
       // const response = { data: { success: true } }; // Mock response
       const response = await submitApplication({ token, ...data });
       if (response.data.success) {
-        setSubmissionSuccess(true);
+        if (page === 'workshop') {
+          window.parent.postMessage({ success: true }, '*');
+          console.log('Success!');
+        } else {
+          setSubmissionSuccess(true);
+        }
       } else {
         throw new Error('Failed to submit application');
       }
