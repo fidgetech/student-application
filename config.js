@@ -52,3 +52,4 @@ export const intendOptions = ['Website and Mobile App Development Full-time', 'W
 export const educationOptions = ['Some high school', 'High school or equivalent', 'Some college', 'Certificate program at community college', 'Associate degree', "Bachelor's degree", "Master's degree", 'Doctorate or professional degree'];
 export const startdateOptions = ['November 1, 2024', 'January 3, 2025'];
 export const scaleOptions = [1,2,3,4,5];
+export const educationWorkshopOptions = ['Some high school', 'High school or equivalent', 'Some college', 'Higher education degree'];

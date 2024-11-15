@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { yesNoOptions, educationOptions, employmentOptions, admissionOptions, intendOptions, startdateOptions, scaleOptions } from '../config.js';
+import { yesNoOptions, educationOptions, educationWorkshopOptions, employmentOptions, admissionOptions, intendOptions, startdateOptions, scaleOptions } from '../config.js';
 
 export function validationSchema(page) {
   const part1Schema = Yup.object({
@@ -50,7 +50,7 @@ export function validationSchema(page) {
     pronounsOther: Yup.string(),
     stateid: Yup.mixed().oneOf(yesNoOptions).required('Required'),
     diagnosisAutism: Yup.mixed().oneOf(yesNoOptions).required('Required'),
-    education: Yup.mixed().oneOf(educationOptions).required('Required'),
+    education: Yup.mixed().oneOf(educationWorkshopOptions).required('Required'),
     photoshop: Yup.mixed().oneOf(scaleOptions).required('Required'),
     illustrator: Yup.mixed().oneOf(scaleOptions).required('Required'),
     aftereffects: Yup.mixed().oneOf(scaleOptions).required('Required'),

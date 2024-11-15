@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Typography, Box, Divider } from '@mui/material';
 import { CheckboxInput, RadioInput, TextInput, NumberInput, SliderInput } from './Inputs.jsx';
-import { yesNoOptions, pronounsOptions, educationOptions, scaleOptions } from '../config.js';
+import { yesNoOptions, pronounsOptions, educationWorkshopOptions, scaleOptions } from '../config.js';
 import { useFormikContext } from 'formik';
 
 const formatData = (values) => {
@@ -78,7 +78,7 @@ export default function ApplicationDesignWorkshop({ setFormatData }) {
       </Box>
 
       <Box marginY={4}>
-        <RadioInput name='education' label="What is the highest level of education you've completed? " options={educationOptions} required={true} />
+        <RadioInput name='education' label="What is the highest level of education you've completed? " options={educationWorkshopOptions} required={true} />
       </Box>
 
       <Divider sx={{ my: 6}} />
@@ -87,6 +87,9 @@ export default function ApplicationDesignWorkshop({ setFormatData }) {
         Experience
       </Typography>
 
+      <Typography variant='body1' align='center' gutterBottom>
+        To best accomodate you in our workshop experience, it's helpful to know what, if any, experience you may have.
+      </Typography>
       <Typography variant='body1' align='center' gutterBottom>
         Please rate your experience on a scale of 1-5:<br />
         <em>1 = no knowledge<br />
