@@ -59,20 +59,20 @@ export default function ApplicationPart1({ setFormatData }) {
       </Typography>
 
       <Box marginY={4}>
-        <TextInput name='firstname' label='First Name (legal)' required={true} sx={{ mb: 2 }} />
-        <TextInput name='lastname' label='Last Name (legal)' required={true} sx={{ mb: 2 }} />
-        <TextInput name='preferred' label='Preferred First Name' sx={{ mb: 2 }} />
-        <TextInput name='email' label='Student Email' required={true} sx={{ mb: 2 }} />
-        <TextInput name='emailConfirm' label='Re-enter Email' required={true} sx={{ mb: 2 }} />
-        <NumberInput name='phone' label='Phone' required={true} format='###-###-####' placeholder='###-###-####' sx={{ mb: 2 }} />
-        <TextInput name='address' label='Street Address' required={true} sx={{ mb: 2 }} />
-        <TextInput name='city' label='City' required={true} sx={{ mb: 2 }} />
-        <TextInput name='state' label='State' required={true} sx={{ mb: 2 }} />
-        <TextInput name='zip' label='ZIP Code' required={true} sx={{ mb: 2 }} />
+        <TextInput name='firstname' label='First Name (legal)' autoComplete='given-name' required={true} sx={{ mb: 2 }} />
+        <TextInput name='lastname' label='Last Name (legal)' autoComplete='family-name' required={true} sx={{ mb: 2 }} />
+        <TextInput name='preferred' label='Preferred First Name' autoComplete='off' sx={{ mb: 2 }} />
+        <TextInput name='email' label='Student Email' autoComplete='email' required={true} sx={{ mb: 2 }} />
+        <TextInput name='emailConfirm' label='Re-enter Email' autoComplete='email' required={true} sx={{ mb: 2 }} />
+        <NumberInput name='phone' label='Phone' autoComplete='tel-national' required={true} format='###-###-####' placeholder='###-###-####' sx={{ mb: 2 }} />
+        <TextInput name='address' label='Street Address' autoComplete='street-address' required={true} sx={{ mb: 2 }} />
+        <TextInput name='city' label='City' autoComplete='address-level2' required={true} sx={{ mb: 2 }} />
+        <TextInput name='state' label='State' autoComplete='address-level1' required={true} sx={{ mb: 2 }} />
+        <TextInput name='zip' label='ZIP Code' autoComplete='postal-code' required={true} sx={{ mb: 2 }} />
       </Box>
 
       <Box marginY={4}>
-        <NumberInput name='birthday' label='Date of birth (MM/DD/YYYY)' required={true} format='##/##/####' placeholder='MM/DD/YYYY' />
+        <NumberInput name='birthday' label='Date of birth (MM/DD/YYYY)' autoComplete='bday' required={true} format='##/##/####' placeholder='MM/DD/YYYY' />
       </Box>
 
       <Box marginY={4}>
@@ -107,8 +107,8 @@ export default function ApplicationPart1({ setFormatData }) {
       </Box>
 
       <Box marginy={4}>
-        <Typography>Parent / Guardian Contact Info<br />(Include Full Name, Email, Phone)</Typography>
-        <TextAreaInput name='parent' rows={3} />
+        <Typography>Parent / Guardian Contact Info<br />(Include Full Name / Email / Phone)</Typography>
+        <TextAreaInput name='parent' autoComplete='off' rows={3} />
       </Box>
 
       <Divider sx={{ my: 6}} />
