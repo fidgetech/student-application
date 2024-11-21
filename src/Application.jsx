@@ -38,7 +38,7 @@ export default function Application({ page }) {
       // const response = { data: { success: true } }; // Mock response
       const response = await submitApplication({ token, ...data });
       if (response.data.success) {
-        if (page === 'workshop') {
+        if (page === 'workshop' || page === 'page1') {
           window.parent.postMessage({ success: true }, '*');
           console.log('Success!');
         } else {

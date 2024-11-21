@@ -108,7 +108,7 @@ export default function ApplicationPart1({ setFormatData }) {
 
       <Box marginy={4}>
         <Typography>Parent / Guardian Contact Info<br />(Include Full Name, Email, Phone)</Typography>
-        <TextAreaInput name='parent' rows={2} />
+        <TextAreaInput name='parent' rows={3} />
       </Box>
 
       <Divider sx={{ my: 6}} />
